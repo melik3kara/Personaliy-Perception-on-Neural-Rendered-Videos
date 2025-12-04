@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Perception Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .consent-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .consent-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .consent-box li {
+            margin-bottom: 8px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            background-color: #95a5a6;
+        }
+
+        button.secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .optional-note {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .progress-header {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db;
+            transition: width 0.3s;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .video-wrapper {
+            text-align: center;
+        }
+
+        .video-wrapper h3 {
+            margin-bottom: 10px;
+        }
+
+        video {
+            width: 400px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #000;
+        }
+
+        .question-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .response-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .response-button {
+            padding: 12px 30px;
+            font-size: 1.05em;
+            background-color: white;
+            color: #333;
+            border: 2px solid #ddd;
+            transition: all 0.2s;
+        }
+
+        .response-button:hover {
+            background-color: #e8f4f8;
+            border-color: #3498db;
+        }
+
+        .response-button.selected {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .questions-list {
+            margin: 30px 0;
+        }
+
+        .question-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .question-item .question-text {
+            text-align: left;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .instructions-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .instructions-list li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .completion-message h1 {
+            color: #27ae60;
+            margin-bottom: 30px;
+        }
+
+        .completion-message p {
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 900px) {
+            video {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .video-container {
+                gap: 20px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Screen 1: Welcome / Consent -->
+        <div id="screen-consent" class="screen active">
+            <h1>Personality Perception Study</h1>
+            <p>Welcome! This study investigates how facial expressions and head positions influence personality perception during conversation. You will view pairs of short talking-head videos and answer questions about the personality traits you perceive in each video.</p>
+            
+            <div class="consent-box">
+                <h3>Consent Information</h3>
+                <p>Before you begin, please note the following:</p>
+                <ul>
+                    <li>You must be 18 years or older to participate</li>
+                    <li>All videos shown are synthetic, generated using neural rendering technology</li>
+                    <li>Your responses are completely anonymous</li>
+                    <li>You may stop the study at any time without penalty</li>
+                    <li>The study will take approximately 10-15 minutes to complete</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>By clicking "I Agree, Start Study" below, you confirm that you have read and understood this information and consent to participate in this research.</strong></p>
+            </div>
+
+            <div class="button-container">
+                <button id="btn-consent" onclick="showScreen('screen-demographics')">I Agree, Start Study</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Demographics -->
+        <div id="screen-demographics" class="screen">
+            <h1>Participant Information</h1>
+            <p class="optional-note">The following questions are optional and help us understand our participant demographics. You may leave any or all fields blank if you prefer.</p>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" min="18" max="100" placeholder="Enter your age">
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender">
+                    <option value="">Prefer not to say</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" placeholder="Enter your country">
+            </div>
+
+            <div class="button-container">
+                <button onclick="saveDemographics(); showScreen('screen-instructions')">Continue</button>
+                <button class="secondary" onclick="showScreen('screen-instructions')">Skip</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Instructions -->
+        <div id="screen-instructions" class="screen">
+            <h1>Study Instructions</h1>
+            <p>Thank you for participating! Here's what you'll be doing:</p>
+
+            <ul class="instructions-list">
+                <li><strong>Video Pairs:</strong> You will see pairs of videos displayed side by side. Both videos show the same person saying the same sentence, but with different facial expressions and/or head positions.</li>
+                <li><strong>Your Task:</strong> For each pair, you will answer six questions comparing the two videos. Each question asks you to compare a specific personality trait or characteristic.</li>
+                <li><strong>How to Respond:</strong> For each question, choose one of three options:
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li><strong>Left</strong> - if the left video shows that trait more strongly</li>
+                        <li><strong>Equal</strong> - if both videos appear equal in that trait</li>
+                        <li><strong>Right</strong> - if the right video shows that trait more strongly</li>
+                    </ul>
+                </li>
+                <li><strong>Videos:</strong> The videos will loop automatically. Take your time to watch them before answering.</li>
+                <li><strong>Progress:</strong> You'll see a progress indicator showing which pair you're on. There are multiple pairs to evaluate.</li>
+            </ul>
+
+            <p style="margin-top: 25px;"><strong>There are no right or wrong answers. We're interested in your genuine impressions and perceptions.</strong></p>
+
+            <div class="button-container">
+                <button onclick="startTasks()">Start Tasks</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Main Task -->
+        <div id="screen-task" class="screen">
+            <div class="progress-header">
+                <strong>Pair <span id="current-pair">1</span> of <span id="total-pairs">10</span></strong>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <h3>Left Video</h3>
+                    <video id="video-left" controls loop autoplay muted>
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-wrapper">
+                    <h3>Right Video</h3>
+                    <video id="video-right" controls loop autoplay muted>
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <div class="questions-list" id="questions-container">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+
+            <div class="button-container">
+                <button id="btn-next-pair" onclick="nextPair()" disabled>Next Pair</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Debrief / Thank You -->
+        <div id="screen-debrief" class="screen">
+            <div class="completion-message">
+                <h1>✓ Study Complete</h1>
+                <p>Thank you for participating in this research study!</p>
+                <p style="margin-top: 20px;">Your responses have been recorded anonymously and will be used for research on how facial expressions and head positions affect personality perception.</p>
+                <p style="margin-top: 20px;">Your contribution to this research is greatly appreciated and will help advance our understanding of nonverbal communication and social perception.</p>
+                <p style="margin-top: 30px; font-size: 0.95em; color: #666;">You may now close this window.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Video pairs configuration
+        // After downloading videos from Drive, organize them in a 'videos' folder
+        // Structure: videos/expression/pose.mp4
+        const videoPairs = [
+            // Example pairs - update these paths based on your video organization
+            {
+                id: "neutral_vs_happy_front",
+                left: "./videos/neutral/front.mp4",
+                right: "./videos/happy/front.mp4"
+            },
+            {
+                id: "neutral_vs_happy_left",
+                left: "./videos/neutral/left.mp4",
+                right: "./videos/happy/left.mp4"
+            },
+            {
+                id: "neutral_vs_happy_right",
+                left: "./videos/neutral/right.mp4",
+                right: "./videos/happy/right.mp4"
+            },
+            {
+                id: "neutral_vs_sad_front",
+                left: "./videos/neutral/front.mp4",
+                right: "./videos/sad/front.mp4"
+            },
+            {
+                id: "happy_vs_angry_front",
+                left: "./videos/happy/front.mp4",
+                right: "./videos/angry/front.mp4"
+            }
+            // Add more pairs as needed based on your 6 expressions × 5 head poses
+            // Total: ~30 pairs
+        ];
+
+        // Questions configuration
+        const questions = [
+            {
+                id: "extraversion",
+                text: "Which video looks more extraverted, expressive, and energetic?"
+            },
+            {
+                id: "agreeableness",
+                text: "Which video looks more friendly, warm, and cooperative?"
+            },
+            {
+                id: "conscientiousness",
+                text: "Which video looks more organized, controlled, and deliberate?"
+            },
+            {
+                id: "emotionalStability",
+                text: "Which video looks calmer, more emotionally steady, and less tense?"
+            },
+            {
+                id: "openness",
+                text: "Which video looks more open-minded, curious, and thoughtful?"
+            },
+            {
+                id: "naturalness",
+                text: "Which video appears more natural and human-like?"
+            }
+        ];
+
+        // Data storage
+        const responses = {
+            demographics: {},
+            trials: []
+        };
+
+        // State management
+        let currentPairIndex = 0;
+        let currentPairAnswers = {};
+
+        // Screen navigation
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // Save demographics
+        function saveDemographics() {
+            responses.demographics = {
+                age: document.getElementById('age').value || null,
+                gender: document.getElementById('gender').value || null,
+                country: document.getElementById('country').value || null
+            };
+        }
+
+        // Start tasks
+        function startTasks() {
+            currentPairIndex = 0;
+            showScreen('screen-task');
+            loadPair(currentPairIndex);
+            updateProgress();
+        }
+
+        // Load a video pair
+        function loadPair(index) {
+            const pair = videoPairs[index];
+            
+            // Update videos
+            document.getElementById('video-left').src = pair.left;
+            document.getElementById('video-right').src = pair.right;
+            
+            // Reset answers for this pair
+            currentPairAnswers = {};
+            
+            // Render questions
+            renderQuestions();
+            
+            // Update progress
+            document.getElementById('current-pair').textContent = index + 1;
+            document.getElementById('total-pairs').textContent = videoPairs.length;
+            
+            // Disable next button until all questions answered
+            document.getElementById('btn-next-pair').disabled = true;
+        }
+
+        // Render all questions
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-item';
+                questionDiv.innerHTML = `
+                    <div class="question-text">
+                        <strong>Question ${index + 1}:</strong> ${question.text}
+                    </div>
+                    <div class="response-buttons">
+                        <button class="response-button" data-question="${question.id}" data-value="left" 
+                                onclick="selectAnswer('${question.id}', 'left', this)">
+                            Left
+                        </button>
+                        <button class="response-button" data-question="${question.id}" data-value="equal" 
+                                onclick="selectAnswer('${question.id}', 'equal', this)">
+                            Equal
+                        </button>
+                        <button class="response-button" data-question="${question.id}" data-value="right" 
+                                onclick="selectAnswer('${question.id}', 'right', this)">
+                            Right
+                        </button>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Select an answer
+        function selectAnswer(questionId, value, button) {
+            // Save answer
+            currentPairAnswers[questionId] = value;
+
+            // Update button styles
+            const allButtons = document.querySelectorAll(`[data-question="${questionId}"]`);
+            allButtons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            // Check if all questions are answered
+            checkAllAnswered();
+        }
+
+        // Check if all questions are answered
+        function checkAllAnswered() {
+            const allAnswered = questions.every(q => currentPairAnswers[q.id] !== undefined);
+            document.getElementById('btn-next-pair').disabled = !allAnswered;
+        }
+
+        // Move to next pair
+        function nextPair() {
+            // Save current pair responses
+            responses.trials.push({
+                pairId: videoPairs[currentPairIndex].id,
+                answers: { ...currentPairAnswers }
+            });
+
+            // Move to next pair or finish
+            currentPairIndex++;
+            if (currentPairIndex < videoPairs.length) {
+                loadPair(currentPairIndex);
+                updateProgress();
+                window.scrollTo(0, 0);
+            } else {
+                finishStudy();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentPairIndex) / videoPairs.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
+        // Finish study
+        function finishStudy() {
+            showScreen('screen-debrief');
+            
+            // Log responses to console
+            console.log('=== STUDY RESPONSES ===');
+            console.log(JSON.stringify(responses, null, 2));
+            console.log('======================');
+            
+            // You can also save to localStorage for later retrieval
+            localStorage.setItem('studyResponses', JSON.stringify(responses));
+            localStorage.setItem('studyCompletionTime', new Date().toISOString());
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Personality Perception Study loaded');
+            console.log('Total video pairs:', videoPairs.length);
+            console.log('Total questions per pair:', questions.length);
+        });
+    </script>
+</body>
+</html>

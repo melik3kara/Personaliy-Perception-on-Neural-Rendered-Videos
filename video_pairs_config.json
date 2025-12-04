@@ -1,0 +1,128 @@
+[
+  {
+    "id": "pair1_angry_1",
+    "left": "videos/Data/out_neutral_001/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_angry_001_041/001_01_01_041_17_crop_128--01-01-05-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Angry"
+  },
+  {
+    "id": "pair2_angry_2",
+    "left": "videos/Data/out_neutral_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_angry_001_051/001_01_01_051_04_crop_128--01-01-05-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Angry"
+  },
+  {
+    "id": "pair3_angry_3",
+    "left": "videos/Data/out_neutral_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_angry_001_080/001_01_01_080_08_crop_128--01-01-05-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Angry"
+  },
+  {
+    "id": "pair4_disgust_1",
+    "left": "videos/Data/out_neutral_001/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_disgust_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-07-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Disgust"
+  },
+  {
+    "id": "pair5_disgust_2",
+    "left": "videos/Data/out_neutral_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_disgust_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-07-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Disgust"
+  },
+  {
+    "id": "pair6_disgust_3",
+    "left": "videos/Data/out_neutral_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_disgust_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-07-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Disgust"
+  },
+  {
+    "id": "pair7_happy_1",
+    "left": "videos/Data/out_neutral_001/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_happy2_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-03-02-02-02-01_with_audio.mp4",
+    "description": "Neutral vs Happy"
+  },
+  {
+    "id": "pair8_happy_2",
+    "left": "videos/Data/out_neutral_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_happy2_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-03-02-02-02-01_with_audio.mp4",
+    "description": "Neutral vs Happy"
+  },
+  {
+    "id": "pair9_happy_3",
+    "left": "videos/Data/out_neutral_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_happy2_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-03-02-02-02-01_with_audio.mp4",
+    "description": "Neutral vs Happy"
+  },
+  {
+    "id": "pair10_happy_4",
+    "left": "videos/Data/out_neutral_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_happy_001_041/001_01_01_041_17_crop_128--01-01-03-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Happy"
+  },
+  {
+    "id": "pair11_happy_5",
+    "left": "videos/Data/out_neutral_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_happy_001_051/001_01_01_051_04_crop_128--01-01-03-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Happy"
+  },
+  {
+    "id": "pair12_happy_6",
+    "left": "videos/Data/out_neutral_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_happy_001_080/001_01_01_080_08_crop_128--01-01-03-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Happy"
+  },
+  {
+    "id": "pair13_sad_1",
+    "left": "videos/Data/out_neutral_001/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_sad2_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-04-02-02-01-01_with_audio.mp4",
+    "description": "Neutral vs Sad"
+  },
+  {
+    "id": "pair14_sad_2",
+    "left": "videos/Data/out_neutral_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_sad2_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-04-02-02-01-01_with_audio.mp4",
+    "description": "Neutral vs Sad"
+  },
+  {
+    "id": "pair15_sad_3",
+    "left": "videos/Data/out_neutral_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_sad2_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-04-02-02-01-01_with_audio.mp4",
+    "description": "Neutral vs Sad"
+  },
+  {
+    "id": "pair16_sad_4",
+    "left": "videos/Data/out_neutral_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_sad_001_041/001_01_01_041_17_crop_128--01-01-04-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Sad"
+  },
+  {
+    "id": "pair17_sad_5",
+    "left": "videos/Data/out_neutral_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_sad_001_051/001_01_01_051_04_crop_128--01-01-04-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Sad"
+  },
+  {
+    "id": "pair18_sad_6",
+    "left": "videos/Data/out_neutral_001_01_01_080_08_crop_128/001_01_01_080_08_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_sad_001_080/001_01_01_080_08_crop_128--01-01-04-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Sad"
+  },
+  {
+    "id": "pair19_surprise_1",
+    "left": "videos/Data/out_neutral_001/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_surprise_001_041/001_01_01_041_17_crop_128--01-01-08-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Surprise"
+  },
+  {
+    "id": "pair20_surprise_2",
+    "left": "videos/Data/out_neutral_001_01_01_041_17_crop_128/001_01_01_041_17_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_surprise_001_051/001_01_01_051_04_crop_128--01-01-08-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Surprise"
+  },
+  {
+    "id": "pair21_surprise_3",
+    "left": "videos/Data/out_neutral_001_01_01_051_04_crop_128/001_01_01_051_04_crop_128--01-01-01-01-01-01-01_with_audio.mp4",
+    "right": "videos/Data/out_surprise_001_080/001_01_01_080_08_crop_128--01-01-08-01-01-01-01_with_audio.mp4",
+    "description": "Neutral vs Surprise"
+  }
+]
