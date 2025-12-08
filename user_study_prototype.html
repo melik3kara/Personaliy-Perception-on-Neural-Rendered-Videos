@@ -382,14 +382,14 @@
             <div class="video-container">
                 <div class="video-wrapper">
                     <h3>Left Video</h3>
-                    <video id="video-left" controls loop autoplay muted>
+                    <video id="video-left" controls muted preload="auto" playsinline>
                         <source src="" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-wrapper">
                     <h3>Right Video</h3>
-                    <video id="video-right" controls loop autoplay muted>
+                    <video id="video-right" controls muted preload="auto" playsinline>
                         <source src="" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -520,8 +520,49 @@
             const pair = videoPairs[index];
             
             // Update videos
-            document.getElementById('video-left').src = pair.left;
-            document.getElementById('video-right').src = pair.right;
+            const videoLeft = document.getElementById('video-left');
+            const videoRight = document.getElementById('video-right');
+            
+            // Remove old event listeners by cloning and replacing
+            const newVideoLeft = videoLeft.cloneNode(true);
+            const newVideoRight = videoRight.cloneNode(true);
+            videoLeft.parentNode.replaceChild(newVideoLeft, videoLeft);
+            videoRight.parentNode.replaceChild(newVideoRight, videoRight);
+            
+            // Get references to new elements
+            const vLeft = document.getElementById('video-left');
+            const vRight = document.getElementById('video-right');
+            
+            // Add event listeners for Firefox compatibility
+            // Handle video end - restart automatically
+            vLeft.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play().catch(e => console.log('Auto-play prevented:', e));
+            });
+            
+            vRight.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play().catch(e => console.log('Auto-play prevented:', e));
+            });
+            
+            // Handle load errors
+            vLeft.addEventListener('error', function(e) {
+                console.error('Video load error (left):', e);
+                this.load(); // Try to reload
+            });
+            
+            vRight.addEventListener('error', function(e) {
+                console.error('Video load error (right):', e);
+                this.load(); // Try to reload
+            });
+            
+            // Set video sources
+            vLeft.src = pair.left;
+            vRight.src = pair.right;
+            
+            // Preload videos
+            vLeft.load();
+            vRight.load();
             
             // Reset answers for this pair
             currentPairAnswers = {};
@@ -535,6 +576,12 @@
             
             // Disable next button until all questions answered
             document.getElementById('btn-next-pair').disabled = true;
+            
+            // Auto-play videos after a short delay
+            setTimeout(() => {
+                vLeft.play().catch(e => console.log('Auto-play prevented:', e));
+                vRight.play().catch(e => console.log('Auto-play prevented:', e));
+            }, 500);
         }
 
         // Render all questions

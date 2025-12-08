@@ -531,14 +531,14 @@
             <div class="video-container">
                 <div class="video-wrapper">
                     <h3>Left Video</h3>
-                    <video id="video-left" controls loop muted>
+                    <video id="video-left" controls muted preload="auto" playsinline>
                         <source src="" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-wrapper">
                     <h3>Right Video</h3>
-                    <video id="video-right" controls loop muted>
+                    <video id="video-right" controls muted preload="auto" playsinline>
                         <source src="" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -844,11 +844,34 @@
             const videoLeft = document.getElementById('video-left');
             const videoRight = document.getElementById('video-right');
             
+            // Reset to beginning
             videoLeft.currentTime = 0;
             videoRight.currentTime = 0;
             
-            videoLeft.play();
-            videoRight.play();
+            // Reload videos to ensure they're ready (helps with Firefox)
+            videoLeft.load();
+            videoRight.load();
+            
+            // Play both videos with error handling
+            const playPromises = [];
+            
+            playPromises.push(
+                videoLeft.play().catch(error => {
+                    console.error('Error playing left video:', error);
+                    // Try again after a short delay
+                    setTimeout(() => videoLeft.play().catch(e => console.log('Retry failed:', e)), 100);
+                })
+            );
+            
+            playPromises.push(
+                videoRight.play().catch(error => {
+                    console.error('Error playing right video:', error);
+                    // Try again after a short delay
+                    setTimeout(() => videoRight.play().catch(e => console.log('Retry failed:', e)), 100);
+                })
+            );
+            
+            return Promise.all(playPromises);
         }
 
         // Start tasks
@@ -870,8 +893,46 @@
             const videoLeft = document.getElementById('video-left');
             const videoRight = document.getElementById('video-right');
             
-            videoLeft.src = pair.left;
-            videoRight.src = pair.right;
+            // Remove old event listeners by cloning and replacing
+            const newVideoLeft = videoLeft.cloneNode(true);
+            const newVideoRight = videoRight.cloneNode(true);
+            videoLeft.parentNode.replaceChild(newVideoLeft, videoLeft);
+            videoRight.parentNode.replaceChild(newVideoRight, videoRight);
+            
+            // Get references to new elements
+            const vLeft = document.getElementById('video-left');
+            const vRight = document.getElementById('video-right');
+            
+            // Add event listeners for Firefox compatibility
+            // Handle video end - restart automatically
+            vLeft.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play().catch(e => console.log('Auto-play prevented:', e));
+            });
+            
+            vRight.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play().catch(e => console.log('Auto-play prevented:', e));
+            });
+            
+            // Handle load errors
+            vLeft.addEventListener('error', function(e) {
+                console.error('Video load error (left):', e);
+                this.load(); // Try to reload
+            });
+            
+            vRight.addEventListener('error', function(e) {
+                console.error('Video load error (right):', e);
+                this.load(); // Try to reload
+            });
+            
+            // Set video sources
+            vLeft.src = pair.left;
+            vRight.src = pair.right;
+            
+            // Preload videos
+            vLeft.load();
+            vRight.load();
             
             // Reset question index if new pair
             if (!isReturningUser || responses.trials.length <= index) {
