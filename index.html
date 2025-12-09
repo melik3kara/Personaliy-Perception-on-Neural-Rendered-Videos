@@ -494,7 +494,7 @@
 
             <div class="button-container">
                 <button onclick="saveDemographics(); showScreen('screen-instructions')">Continue</button>
-                <button class="secondary" onclick="showScreen('screen-instructions')">Skip</button>
+                <button class="secondary" onclick="skipDemographics()">Skip</button>
             </div>
         </div>
 
@@ -740,6 +740,7 @@
                 email: userEmail,
                 prolificId: responses.prolificId,
                 demographics: responses.demographics,
+                demographicsSkipped: responses.demographicsSkipped || false,
                 trials: responses.trials,
                 pairOrder: videoPairs.map(p => p.id),
                 currentPairIndex: currentPairIndex,
@@ -802,13 +803,16 @@
 
             // Check for existing session
             const existingSession = loadSession(email);
-            if (existingSession && existingSession.trials.length > 0) {
+            if (existingSession && (existingSession.trials.length > 0 || existingSession.demographicsSkipped)) {
                 // Restore session
                 responses.demographics = existingSession.demographics;
+                responses.demographicsSkipped = existingSession.demographicsSkipped || false;
                 responses.trials = existingSession.trials;
-                currentPairIndex = existingSession.currentPairIndex;
-                currentQuestionIndex = existingSession.currentQuestionIndex || 0;
-                currentPairAnswers = existingSession.currentPairAnswers || {};
+                
+                // Set currentPairIndex to the next incomplete pair (trials.length = completed pairs)
+                currentPairIndex = existingSession.trials.length;
+                currentQuestionIndex = 0;
+                currentPairAnswers = {};
                 
                 // Restore pair order
                 if (existingSession.pairOrder && existingSession.pairOrder.length > 0) {
@@ -843,7 +847,15 @@
                 gender: document.getElementById('gender').value || null,
                 country: document.getElementById('country').value || null
             };
+            responses.demographicsSkipped = false;
             saveSession();
+        }
+
+        // Skip demographics (save flag so it won't ask again)
+        function skipDemographics() {
+            responses.demographicsSkipped = true;
+            saveSession();
+            showScreen('screen-instructions');
         }
 
         // Sync both videos
